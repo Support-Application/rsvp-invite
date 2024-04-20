@@ -1,9 +1,11 @@
+import { InfiniteMovingCardsDemo } from "@/components/InfiniteMovingCards";
+import { LayoutGridDemo } from "@/components/LayoutGrid";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
-import { eventDetails, getDate, getDay, getMonth, getTime } from "@/lib/utils";
-import { Contact, Flower, HandHeartIcon, HomeIcon, Mail, MapPinIcon, MessageSquareQuote, PhoneOff, Tally1Icon } from "lucide-react";
+import { eventDetails, getDate, getDay, getMonth, getTime, getYear } from "@/lib/utils";
+import { Contact, Flower, HandHeartIcon, HomeIcon, Mail, MapPinIcon, MessageSquareQuote, PhoneOff, Tally1Icon, TimerOff } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -50,7 +52,7 @@ export default function Home() {
         </div>
 
         <div className="flex items-center gap-1 justify-center"> 
-          <PhoneOff className='w-4 h-4 text-red-400'/>
+          <TimerOff className='w-4 h-4 text-red-400'/>
           <p className="text-muted-foreground">Deadline: {eventDetails.event.rsvp.deadline}</p>
         </div>
       </div>
@@ -72,7 +74,6 @@ export default function Home() {
           <div className="flex-col flex md:flex-row justify-between">
             <div>
               <h1 className="max-w-4xl text-3xl font-bold my-2 md:text-6xl lg:text-7xl text-white">The Details</h1>
-              <p className="mt-2 max-w-prose mb-6 md:mb-1 text-gray-300 flex items-center gap-1"><Contact className="w-4 h-4 text-green-400" /> {eventDetails.event.host}</p>
               <p className="max-w-prose mb-6 md:mb-1 text-gray-300 flex items-center gap-1"><Mail className="w-4 h-4 text-green-400" /> {eventDetails.event.rsvp.email}</p>
               <p className="text-muted-foreground">{eventDetails.event.rsvp.additionalNotes}</p>
             </div>
@@ -93,8 +94,46 @@ export default function Home() {
 
           </div>
 
-          {/* <ParallaxScroll images={eventDetails.event.images.gallery} /> */}
+          <InfiniteMovingCardsDemo />
           
+      </MaxWidthWrapper>
+    </div>
+
+    <MaxWidthWrapper className='mb-20 mt-12 p-3 sm:mt-30 flex flex-col items-center justify-center text-center'>
+      <h1 className="max-w-4xl text-3xl font-bold my-2 md:text-6xl lg:text-7xl">You will forever be in our hearts</h1>
+      <p className="mt-1 max-w-prose dark:text-gray-300 text-zinc-700 sm:text-lg flex items-center gap-1"><Contact className="w-4 h-4 text-green-400" /> {eventDetails.event.host}</p>
+      <LayoutGridDemo/>
+    </MaxWidthWrapper>
+
+    <div className="bg-primary p-8 w-full">
+      <MaxWidthWrapper className="mt-12">
+        <div className="flex-col flex md:flex-row items-center justify-between">
+          <div>
+            <h1 className="max-w-4xl text-3xl font-bold my-2 md:text-6xl lg:text-7xl text-white">Kindly RSVP</h1>
+            <iframe
+              title="Google Map Location"
+              src="https://maps.google.com/maps?q=5678+Peaceful+Lane,Springfield&output=embed"
+              width="100%"
+              height="300"
+              style={{ filter: 'invert(90%) hue-rotate(180deg)', border: 'none' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+         
+          <div>
+            <p className="sm:text-lg max-w-prose text-white">The favour of your response is requested by {`${getDate(eventDetails.event.rsvp.deadline)} ${getMonth(eventDetails.event.rsvp.deadline)} ${getYear(eventDetails.event.rsvp.deadline)}`}</p>
+            <Button className={buttonVariants({
+            size: 'lg',
+            variant: 'secondary',
+            className: 'mt-5 w-full'
+          })}>
+            <MessageSquareQuote className="h-4 w-4 mr-2" />
+            RSVP
+          </Button>
+          </div>
+        </div>
       </MaxWidthWrapper>
     </div>
    </>

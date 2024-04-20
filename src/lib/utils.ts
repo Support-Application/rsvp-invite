@@ -19,6 +19,11 @@ export const getMonth = (date: string) => {
   return monthOfYear;
 }
 
+export const getYear = (date: string) => {
+  const d = new Date(date);
+  return d.getFullYear();
+}
+
 export const getDate = (date: string) => {
   const d = new Date(date);
   return d.getDate(); 
